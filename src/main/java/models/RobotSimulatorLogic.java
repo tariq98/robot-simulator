@@ -5,7 +5,7 @@ public class RobotSimulatorLogic implements IRobotSimulatorLogic {
     private MoveDirection moveDirection;
 
     public RobotSimulatorLogic() {
-        position = new Position(0, 0);
+        position = new Position();
         moveDirection = MoveDirection.NORTH;
     }
 
@@ -18,7 +18,7 @@ public class RobotSimulatorLogic implements IRobotSimulatorLogic {
     }
 
     public void move() {
-        Position newPosition = new Position(-1, -1);
+        Position newPosition = new Position();
 
         switch(moveDirection) {
             case NORTH:
@@ -40,38 +40,47 @@ public class RobotSimulatorLogic implements IRobotSimulatorLogic {
     }
 
     public void rotate(RotationDirection rotationDirection) {
-        if(rotationDirection == RotationDirection.LEFT) {
-            switch(moveDirection) {
-                case NORTH:
-                    moveDirection = MoveDirection.WEST;
-                    break;
-                case SOUTH:
-                    moveDirection = MoveDirection.EAST;
-                    break;
-                case EAST:
-                    moveDirection = MoveDirection.NORTH;
-                    break;
-                case WEST:
-                    moveDirection = MoveDirection.SOUTH;
-                    break;
-            }
+        switch(rotationDirection) {
+            case LEFT:
+                rotateLeft();
+                break;
+            case RIGHT:
+                rotateRight();
+                break;
         }
+    }
 
-        if(rotationDirection == RotationDirection.RIGHT) {
-            switch(moveDirection) {
-                case NORTH:
-                    moveDirection = MoveDirection.EAST;
-                    break;
-                case SOUTH:
-                    moveDirection = MoveDirection.WEST;
-                    break;
-                case EAST:
-                    moveDirection = MoveDirection.SOUTH;
-                    break;
-                case WEST:
-                    moveDirection = MoveDirection.NORTH;
-                    break;
-            }
+    private void rotateLeft() {
+        switch(moveDirection) {
+            case NORTH:
+                moveDirection = MoveDirection.WEST;
+                break;
+            case SOUTH:
+                moveDirection = MoveDirection.EAST;
+                break;
+            case EAST:
+                moveDirection = MoveDirection.NORTH;
+                break;
+            case WEST:
+                moveDirection = MoveDirection.SOUTH;
+                break;
+        }
+    }
+
+    private void rotateRight() {
+        switch(moveDirection) {
+            case NORTH:
+                moveDirection = MoveDirection.EAST;
+                break;
+            case SOUTH:
+                moveDirection = MoveDirection.WEST;
+                break;
+            case EAST:
+                moveDirection = MoveDirection.SOUTH;
+                break;
+            case WEST:
+                moveDirection = MoveDirection.NORTH;
+                break;
         }
     }
 
