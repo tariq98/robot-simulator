@@ -18,19 +18,11 @@ public class Position {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public boolean isValid() {
-        return !(x > 4 || x < 0 || y > 4 || y < 0);
+    public boolean isOutOfBounds() {
+        return x > 4 || x < 0 || y > 4 || y < 0;
     }
 }

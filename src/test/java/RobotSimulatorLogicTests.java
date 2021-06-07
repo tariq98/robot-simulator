@@ -34,7 +34,7 @@ public class RobotSimulatorLogicTests {
     }
 
     @Test
-    public void robotNotOutOfBoundsTest() {
+    public void robotNotOutOfBoundsTest1() {
         robotSimulatorLogic.place(new Position(0, 0), MoveDirection.NORTH);
         robotSimulatorLogic.move();
         robotSimulatorLogic.move();
@@ -52,5 +52,26 @@ public class RobotSimulatorLogicTests {
         robotSimulatorLogic.move();
         robotSimulatorLogic.move();
         assertEquals(robotSimulatorLogic.report(), "4,4,EAST");
+    }
+
+    @Test
+    public void robotNotOutOfBoundsTest2() {
+        robotSimulatorLogic.place(new Position(4, 4), MoveDirection.SOUTH);
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.rotate(RotationDirection.RIGHT);
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        robotSimulatorLogic.move();
+        assertEquals(robotSimulatorLogic.report(), "0,0,WEST");
     }
 }

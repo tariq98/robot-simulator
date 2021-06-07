@@ -3,21 +3,27 @@ package models;
 public class RobotSimulatorLogic implements IRobotSimulatorLogic {
     private Position position;
     private MoveDirection moveDirection;
+    private boolean isPlaced;
 
     public RobotSimulatorLogic() {
         position = new Position();
         moveDirection = MoveDirection.NORTH;
+        isPlaced = false;
     }
 
     public void place(Position position, MoveDirection moveDirection) {
-        if(!position.isValid()) {
+        if(position.isOutOfBounds())
             return;
-        }
+
         this.position = position;
         this.moveDirection = moveDirection;
+        this.isPlaced = true;
     }
 
     public void move() {
+        if(!isPlaced)
+            return;
+
         Position newPosition = new Position();
 
         switch(moveDirection) {
@@ -35,11 +41,14 @@ public class RobotSimulatorLogic implements IRobotSimulatorLogic {
                 break;
         }
 
-        if(newPosition.isValid())
+        if(!newPosition.isOutOfBounds())
             position = newPosition;
     }
 
     public void rotate(RotationDirection rotationDirection) {
+        if(!isPlaced)
+            return;
+
         switch(rotationDirection) {
             case LEFT:
                 rotateLeft();
@@ -85,6 +94,9 @@ public class RobotSimulatorLogic implements IRobotSimulatorLogic {
     }
 
     public String report() {
+        if(!isPlaced)
+            return "Not placed";
+
         return position.getX() + "," + position.getY() + "," + moveDirection;
     }
 }
